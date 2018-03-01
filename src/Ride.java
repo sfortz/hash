@@ -16,7 +16,11 @@ public class Ride implements Comparable{
 		this.RowEnd = RowEnd;
 	}
 
-	public int getDistance() {
+    public int getEarlStart() {
+        return earlStart;
+    }
+
+    public int getDistance() {
 		return Math.abs(ColumnStart - ColumnEnd) + Math.abs(RowEnd-RowStart);
 	}
 

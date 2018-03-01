@@ -14,6 +14,19 @@ public class Trajet {
         this.van = van;
     }
 
+    public int getVal(int bonus){
+        int sum = 0;
+        int curTime = 0;
+        for (Ride r: this.rides){
+            sum+= r.getDistance();
+            if(r.getEarlStart()==curTime){
+                sum += bonus;
+            }
+            curTime += r.getDistance();
+        }
+        return sum;
+    }
+
     @Override
     public String toString(){
 

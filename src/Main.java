@@ -1,7 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -14,7 +13,8 @@ public class Main {
 
         ArrayList<Ride> initRides = importIn();
         Collections.sort(initRides);
-        ArrayList<Trajet> initTrajets = repartition(initRides);
+        ArrayList<Ride> rides = repartition(initRides);
+        ArrayList<Trajet> initTrajets = generateNextRides(rides);
         writer(initTrajets);
 
     }
@@ -54,7 +54,6 @@ public class Main {
     }
 
     public static ArrayList<Ride> repartition(ArrayList<Ride> rides) {
-        ArrayList<Trajet> trajets = new ArrayList<>();
 
         ArrayList<Ride> rideUnder5000 = rides.stream()
                 .filter(r -> r.getLastStart() < 5000)
@@ -62,6 +61,18 @@ public class Main {
 
         return rideUnder5000;
     }
+
+    public static int getValue(ArrayList<Trajet> trajets) {
+
+        int val = 0;
+
+        for(Trajet t: trajets){
+            val += t.getVal(bonus);
+        }
+
+        return val;
+    }
+
 
     public static void writer(ArrayList<Trajet> trajets){
         try{
