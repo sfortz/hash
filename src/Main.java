@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Main {
 
@@ -10,7 +11,7 @@ public class Main {
     public static void main(String[] args) {
 
         ArrayList<Ride> initRides = importIn();
-        ArrayList<Trajet> initTrajets = repartition();
+        ArrayList<Trajet> initTrajets = repartition(initRides);
         writer(initTrajets);
 
     }
@@ -49,8 +50,10 @@ public class Main {
         return rides;
     }
 
-    public static ArrayList<Trajet> repartition() {
+    public static ArrayList<Trajet> repartition(ArrayList<Ride> rides) {
         ArrayList<Trajet> trajets = new ArrayList<>();
+        Collections.sort(rides);
+
         return  trajets;
     }
 
