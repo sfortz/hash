@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.stream.Stream;
 
 public class Main {
 
@@ -11,6 +12,7 @@ public class Main {
     public static void main(String[] args) {
 
         ArrayList<Ride> initRides = importIn();
+        Collections.sort(initRides);
         ArrayList<Trajet> initTrajets = repartition(initRides);
         writer(initTrajets);
 
@@ -52,7 +54,15 @@ public class Main {
 
     public static ArrayList<Trajet> repartition(ArrayList<Ride> rides) {
         ArrayList<Trajet> trajets = new ArrayList<>();
-        Collections.sort(rides);
+        
+        Stream<Ride> rideUnder5000 = persons.stream().filter(p -> p.getAge() > 18);
+        List<Student> students = persons.stream()
+                .filter(p -> p.getAge() > 18)
+                .map(Student::new)
+                .collect(Collectors.toCollection(ArrayList::new));
+
+        rides.
+
 
         return  trajets;
     }

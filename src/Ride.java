@@ -24,7 +24,8 @@ public class Ride implements Comparable{
 		return this.lateFinish - this.getDistance();
 	}
 
-	@Override public int compareTo(Object o){
+	@Override
+    public int compareTo(Object o){
 		Ride i = (Ride) o;
 		if(this.getLastStart() < i.getLastStart())
 			return -1;
