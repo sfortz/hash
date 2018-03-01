@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Main {
 
@@ -54,15 +53,14 @@ public class Main {
         return rides;
     }
 
-    public static ArrayList<Trajet> repartition(ArrayList<Ride> rides) {
+    public static ArrayList<Ride> repartition(ArrayList<Ride> rides) {
         ArrayList<Trajet> trajets = new ArrayList<>();
 
-        //Stream<Ride> rideUnder5000 = rides.stream().filter(r -> r.getLastStart() < 5000);
-        List<Ride> rideUnder5000 = rides.stream()
+        ArrayList<Ride> rideUnder5000 = rides.stream()
                 .filter(r -> r.getLastStart() < 5000)
                 .collect(Collectors.toCollection(ArrayList::new));
 
-        return  trajets;
+        return rideUnder5000;
     }
 
     public static void writer(ArrayList<Trajet> trajets){
