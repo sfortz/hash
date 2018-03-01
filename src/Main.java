@@ -1,6 +1,8 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Main {
@@ -54,15 +56,11 @@ public class Main {
 
     public static ArrayList<Trajet> repartition(ArrayList<Ride> rides) {
         ArrayList<Trajet> trajets = new ArrayList<>();
-        
-        Stream<Ride> rideUnder5000 = persons.stream().filter(p -> p.getAge() > 18);
-        List<Student> students = persons.stream()
-                .filter(p -> p.getAge() > 18)
-                .map(Student::new)
+
+        //Stream<Ride> rideUnder5000 = rides.stream().filter(r -> r.getLastStart() < 5000);
+        List<Ride> rideUnder5000 = rides.stream()
+                .filter(r -> r.getLastStart() < 5000)
                 .collect(Collectors.toCollection(ArrayList::new));
-
-        rides.
-
 
         return  trajets;
     }
