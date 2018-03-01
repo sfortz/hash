@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -14,7 +15,7 @@ public class Main {
         ArrayList<Ride> initRides = importIn();
         Collections.sort(initRides);
         ArrayList<Ride> rides = repartition(initRides);
-        ArrayList<Trajet> initTrajets = generateNextRides(rides);
+        ArrayList<Trajet> initTrajets = generateNextRide(rides);
         writer(initTrajets);
 
     }
@@ -36,7 +37,6 @@ public class Main {
             steps = Integer.parseInt(tempInit[5]);
 
             while ((sCurrentLine = br.readLine()) != null) {
-                //System.out.println(sCurrentLine);
                 tempInit = sCurrentLine.split(" ");
                 int RowStart  = Integer.parseInt(tempInit[0]);
                 int ColumnStart = Integer.parseInt(tempInit[1]);
@@ -60,6 +60,15 @@ public class Main {
                 .collect(Collectors.toCollection(ArrayList::new));
 
         return rideUnder5000;
+    }
+
+    public static Trajet best(ArrayList<Trajet> trajets) {
+
+        HashMap<Integer, Trajet> map = new HashMap<Integer, Trajet>;
+        Trajet trajet;
+
+        trajets.m
+        return trajet;
     }
 
     public static int getValue(ArrayList<Trajet> trajets) {
