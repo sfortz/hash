@@ -90,4 +90,19 @@ public class Main {
             System.out.println(e);
         }
     }
+
+    //
+    public ArrayList<Trajet> generateNextRide(ArrayList<Ride> rides,Trajet trajet){
+
+        ArrayList<Trajet> trajets = new ArrayList<Trajet>();
+
+        for (int i = 0; i < rides.size(); i++) {
+            Trajet trajet2 = trajet.clone();
+            trajet2.addRide(rides.get(i));
+            trajets.add(trajet2);
+        }
+
+
+        return trajets;
+    }
 }

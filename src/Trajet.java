@@ -1,10 +1,12 @@
+import java.util.ArrayList;
+
+
 public class Trajet {
 
     private int van, posDepX, posDepY, posEndX, posEndY, timeDep, timeEnd;
-    private Ride[] rides;
+    private ArrayList<Ride> rides;
 
-    public Trajet(int van, int posDepX, int posDepY, int posEndX, int posEndY, int timeDep, int timeEnd, Ride[] rides) {
-        this.rides = rides;
+    public Trajet(int van, int posDepX, int posDepY, int posEndX, int posEndY, int timeDep, int timeEnd) {
         this.posDepX = posDepX;
         this.posDepY = posDepY;
         this.posEndX = posEndX;
@@ -36,7 +38,15 @@ public class Trajet {
             str= str + " " + r.id;
         };
 
-        str = rides.length + str + "\n";
+        str = rides.size() + str + "\n";
         return str;
+    }
+
+    public void addRide(Ride newRide){
+        rides.add(newRide);
+    }
+
+    public Trajet clone(){
+        return new Trajet( van,  posDepX,  posDepY,  posEndX,  posEndY,  timeDep,  timeEnd);
     }
 }
