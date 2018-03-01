@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Main {
 
@@ -67,8 +68,21 @@ public class Main {
         HashMap<Integer, Trajet> map = new HashMap<Integer, Trajet>;
         Trajet trajet;
 
-        trajets.m
+        Stream<Integer> vals = trajets.stream()
+                .map(t -> new Integer(t.getVal(bonus)));
+
+        map =
         return trajet;
+    }
+
+    public static HashMap<Integer, Trajet> zip(Stream<Integer> i, ArrayList<Trajet> t) {
+        Iterator<A> it1 = as.iterator();
+        Iterator<B> it2 = bs.iterator();
+        List<Pair<A, B>> result = new ArrayList<>();
+        while (it1.hasNext() && it2.hasNext()) {
+            result.add(new Pair<A, B>(it1.next(), it2.next()));
+        }
+        return result;
     }
 
     public static int getValue(ArrayList<Trajet> trajets) {
