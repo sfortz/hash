@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -66,21 +67,22 @@ public class Main {
     public static Trajet best(ArrayList<Trajet> trajets) {
 
         HashMap<Integer, Trajet> map = new HashMap<Integer, Trajet>;
-        Trajet trajet;
 
         Stream<Integer> vals = trajets.stream()
                 .map(t -> new Integer(t.getVal(bonus)));
 
-        map =
-        return trajet;
+        map = zip(vals,trajets);
+        ArrayList<Trajet> list = new ArrayList<Trajet>(map.values());
+        Collections.sort(list);
+        return list.get(0);
     }
 
     public static HashMap<Integer, Trajet> zip(Stream<Integer> i, ArrayList<Trajet> t) {
-        Iterator<A> it1 = as.iterator();
-        Iterator<B> it2 = bs.iterator();
-        List<Pair<A, B>> result = new ArrayList<>();
+        Iterator<Integer> it1 = i.iterator();
+        Iterator<Trajet> it2 = t.iterator();
+        HashMap<Integer, Trajet> result = new HashMap<Integer, Trajet>();
         while (it1.hasNext() && it2.hasNext()) {
-            result.add(new Pair<A, B>(it1.next(), it2.next()));
+            result.put(it1.next(), it2.next());
         }
         return result;
     }
