@@ -1,7 +1,7 @@
 import sys
 
 class Library:
-	def __init__(self, id, nbLivre, sign, speed, books, scores):
+	def __init__(self, id, nbLivre, sign, speed, books, scores,prior):
 		self.id = id
 		self.nbLivre = nbLivre
 		self.sign = sign
@@ -9,6 +9,7 @@ class Library:
 		self.books = books
 		self.processedBooks = []
 		self.scores = scores
+		self.prior = prior
 		#print(f"Library created with {nbLivre} {sign} {speed} {books}")
 
 def main(filename):
@@ -27,12 +28,16 @@ def main(filename):
 			scores = [0] * nbLivre
 			for z in range(nbLivre):
 				scores[z] = scoresTot[books[z]]
-			libs.append(Library(id, nbLivre, sign, speed, books, scores))
+
+			nbLivresProcessed = min((nbJour - sign), nbLivre) * speed
+			prior = sum(scores[:nbLivresProcessed])
+
+			libs.append(Library(id, nbLivre, sign, speed, books, scores,prior))
 		
 		librairies = [] # processed orderd by sign up
 
 		librairies = libs
-		librairies.sort(key=lambda e : e.speed,reverse=True)
+		librairies.sort(key=lambda e : e.prior,reverse=True)
 		dejaVu = dict()
 		for l in librairies:
 			orderedZipped = list(zip(l.books,l.scores))
