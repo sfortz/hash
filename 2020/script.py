@@ -10,13 +10,7 @@ class Library:
 		self.processedBooks = []
 		#print(f"Library created with {nbLivre} {sign} {speed} {books}")
 
-def main():
-	filename="a_example"
-	#filename="b_read_on"
-	#filename="c_incunabula"
-	#filename="d_tough_choices"
-	#filename="e_so_many_books"
-	#filename="f_libraries_of_the_world"
+def main(filename):
 	print(f"reading from {filename}.in and exporting to {filename}.out")
 
 	with open(filename+'.txt',"r") as i, open(filename+'.out',"w") as o:
@@ -49,4 +43,5 @@ def main():
 
 if __name__ == "__main__":
     # execute only if run as a script
-    main()
+	for filename in ["a_example","b_read_on","c_incunabula","d_tough_choices","e_so_many_books","f_libraries_of_the_world"]:
+		main(filename)
