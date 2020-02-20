@@ -34,7 +34,7 @@ def main():
 		o.write(str(len(librairies)))
 		for lib in librairies:
 			o.write(f"{lib.id} {len(lib.processedBooks)}")
-			o.write(f"{lib.id} {' '.join(lib.processedBooks)}")
+			o.write(' '.join(lib.processedBooks))
 
 
 if __name__ == "__main__":
