@@ -1,5 +1,5 @@
 import sys
-
+		
 class Library:
 	def __init__(self, id, nbLivre, sign, speed, books):
 		self.id = id
@@ -32,7 +32,7 @@ def main(filename):
 		librairies = libs
 		librairies.sort(key=lambda e : e.speed,reverse=True)
 		for l in librairies:
-			l.processedBooks = l.books
+			l.processedBooks = zip(*zip(l.books,l.scores).sort(key=lambda e : e[1],reverse=True))
 
 
 		o.write(str(len(librairies))+"\n")
