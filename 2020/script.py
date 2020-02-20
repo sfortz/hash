@@ -1,13 +1,14 @@
 import sys
 		
 class Library:
-	def __init__(self, id, nbLivre, sign, speed, books):
+	def __init__(self, id, nbLivre, sign, speed, books, scores):
 		self.id = id
 		self.nbLivre = nbLivre
 		self.sign = sign
 		self.speed = speed
 		self.books = books
 		self.processedBooks = []
+		self.scores = scores
 		#print(f"Library created with {nbLivre} {sign} {speed} {books}")
 
 def main(filename):
@@ -15,15 +16,18 @@ def main(filename):
 
 	with open(filename+'.txt',"r") as i, open(filename+'.out',"w") as o:
 		nbLivreTot, nbBibli, nbJour = [int(s) for s in i.readline().split(" ")]
-		scores = [int(s) for s in i.readline().split(" ")]
+		scoresTot = [int(s) for s in i.readline().split(" ")]
 
-		#print(f"context is {nbLivreTot} {nbBibli} {nbJour} {scores}")
+		#print(f"context is {nbLivreTot} {nbBibli} {nbJour} {scoresTot}")
 
 		libs = []  # librairies lue
 		for id in range(nbBibli):
 			nbLivre, sign, speed = [int(s) for s in i.readline().split(" ")]
 			books = [int(s) for s in i.readline().split(" ")]
-			libs.append(Library(id, nbLivre, sign, speed, books))
+			scores = [0] * nbLivre
+			for z in range(nbLivre):
+				scores[z] = scoresTot[books[z]]
+			libs.append(Library(id, nbLivre, sign, speed, books, scores))
 		
 
 		# code her
@@ -32,7 +36,9 @@ def main(filename):
 		librairies = libs
 		librairies.sort(key=lambda e : e.speed,reverse=True)
 		for l in librairies:
-			l.processedBooks = zip(*zip(l.books,l.scores).sort(key=lambda e : e[1],reverse=True))
+			orderedZipped = list(zip(l.books,l.scores))
+			orderedZipped.sort(key=lambda e : e[1],reverse=True)
+			l.processedBooks = list(list(zip(*orderedZipped))[0])
 
 
 		o.write(str(len(librairies))+"\n")
