@@ -1,0 +1,8 @@
+6 2 7         6 livres, 2 bibli, 7 jours
+1 2 3 6 5 4   le score des 6 livres
+			  -> 2 bibli
+5 2 2         	5 livres    2 jours de sign up    2 livres / jours
+0 1 2 3 4		id des livres
+
+4 3 1
+0 2 3 5
