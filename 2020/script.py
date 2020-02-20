@@ -29,16 +29,21 @@ def main(filename):
 				scores[z] = scoresTot[books[z]]
 			libs.append(Library(id, nbLivre, sign, speed, books, scores))
 		
-
-		# code her
 		librairies = [] # processed orderd by sign up
 
 		librairies = libs
 		librairies.sort(key=lambda e : e.speed,reverse=True)
+		dejaVu = []
 		for l in librairies:
 			orderedZipped = list(zip(l.books,l.scores))
 			orderedZipped.sort(key=lambda e : e[1],reverse=True)
-			l.processedBooks = list(list(zip(*orderedZipped))[0])
+			lBooksSorted = list(list(zip(*orderedZipped))[0])
+			for b in lBooksSorted:
+				if b in dejaVu :
+					pass
+				else :
+					l.processedBooks.append(b)
+					dejaVu.append(b)
 
 
 		o.write(str(len(librairies))+"\n")
