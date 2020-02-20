@@ -18,6 +18,8 @@ def main(filename):
 	with open(filename+'.txt',"r") as i, open(filename+'.out',"w") as o:
 		nbLivreTot, nbBibli, nbJour = [int(s) for s in i.readline().split(" ")]
 		scoresTot = [int(s) for s in i.readline().split(" ")]
+		maxScore = max(scoresTot)
+		minScore = min(scoresTot)
 
 		#print(f"context is {nbLivreTot} {nbBibli} {nbJour} {scoresTot}")
 
@@ -38,8 +40,11 @@ def main(filename):
 			#nbLivresProcessed = min((nbJour - sign), nbLivre) * speed
 			#prior = sum(scores[:nbLivresProcessed])
 
+			#w = [x ** 0.2 for x in range(len(scores))] #weights
+			#prior = (sum([ _x * _w for _x, _w in zip( scores, w[::-1] ) ]) / speed) / sign 
+			
 			prior = (sum(scores[:]) / speed) / sign
-
+			
 			libs.append(Library(id, nbLivre, sign, speed, books, scores,prior))
 		
 		librairies = [] # processed orderd by sign up
