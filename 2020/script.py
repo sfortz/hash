@@ -1,5 +1,5 @@
 import sys
-		
+
 class Library:
 	def __init__(self, id, nbLivre, sign, speed, books, scores):
 		self.id = id
@@ -33,18 +33,18 @@ def main(filename):
 
 		librairies = libs
 		librairies.sort(key=lambda e : e.speed,reverse=True)
-		dejaVu = []
+		dejaVu = dict()
 		for l in librairies:
 			orderedZipped = list(zip(l.books,l.scores))
 			orderedZipped.sort(key=lambda e : e[1],reverse=True)
 			lBooksSorted = list(list(zip(*orderedZipped))[0])
 			for b in lBooksSorted:
-				if b in dejaVu :
-					pass
-				else :
+				if not dejaVu.get(b,False) :
 					l.processedBooks.append(b)
-					dejaVu.append(b)
+					dejaVu[b] = True
 
+		#retirer les librairies qui n'ont pas de livres.
+		librairies = list(filter(lambda l: len(l.processedBooks) != 0, librairies))
 
 		o.write(str(len(librairies))+"\n")
 		for lib in librairies:
