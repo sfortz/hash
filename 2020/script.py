@@ -29,8 +29,16 @@ def main(filename):
 			for z in range(nbLivre):
 				scores[z] = scoresTot[books[z]]
 
-			nbLivresProcessed = min((nbJour - sign), nbLivre) * speed
-			prior = sum(scores[:nbLivresProcessed])
+			orderedZipped = list(zip(books,scores))
+			orderedZipped.sort(key=lambda e : e[1],reverse=True)
+			oredered = list(zip(*orderedZipped))
+			books = list(oredered[0])
+			scores = list(oredered[1])
+
+			#nbLivresProcessed = min((nbJour - sign), nbLivre) * speed
+			#prior = sum(scores[:nbLivresProcessed])
+
+			prior = (sum(scores[:]) / speed) / sign
 
 			libs.append(Library(id, nbLivre, sign, speed, books, scores,prior))
 		
@@ -40,10 +48,7 @@ def main(filename):
 		librairies.sort(key=lambda e : e.prior,reverse=True)
 		dejaVu = dict()
 		for l in librairies:
-			orderedZipped = list(zip(l.books,l.scores))
-			orderedZipped.sort(key=lambda e : e[1],reverse=True)
-			lBooksSorted = list(list(zip(*orderedZipped))[0])
-			for b in lBooksSorted:
+			for b in l.books:
 				if not dejaVu.get(b,False) :
 					l.processedBooks.append(b)
 					dejaVu[b] = True
