@@ -1,11 +1,13 @@
 import sys
 
 class Library:
-	def __init__(self, nbL, sign, speed, books):
+	def __init__(self, id, nbL, sign, speed, books):
+		self.id = id
 		self.nbL = nbL
 		self.sign = sign
 		self.speed = speed
 		self.books = books
+		self.processedBooks = []
 		print(f"Library created with {nbL} {sign} {speed} {books}")
 
 def main():
@@ -18,13 +20,21 @@ def main():
 
 		print(f"context is {nbL} {nbB} {nbJ} {scores}")
 
-		for _ in range(nbB):
+		libs = []
+		for id in range(nbB):
 			nbL, sign, speed = [int(s) for s in i.readline().split(" ")]
 			books = [int(s) for s in i.readline().split(" ")]
-			Library(nbL, sign, speed, books)
+			libs.append(Library(id, nbL, sign, speed, books))
 		
-		o.write(str(42))
-		o.write(str(42))
+
+		# code her
+		librairies = [] # orderd by sign up
+
+
+		o.write(str(len(librairies)))
+		for lib in librairies:
+			o.write(f"{lib.id} {len(lib.processedBooks)}")
+			o.write(f"{lib.id} {' '.join(lib.processedBooks)}")
 
 
 if __name__ == "__main__":
