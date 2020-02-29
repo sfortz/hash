@@ -1,5 +1,10 @@
 import sys
 
+"""
+L'idée est de donner un score à chaque librairie et de les trier sur base de ce score.
+Les livres de chaque librairie son uniquement trié par ordre de va décroissane et les doublon sont retiré sur les dernier livres.
+"""
+
 class Library:
 	def __init__(self, id, nbLivre, sign, speed, books, scores,prior):
 		self.id = id
@@ -8,9 +13,14 @@ class Library:
 		self.speed = speed
 		self.books = books
 		self.processedBooks = []
+		self.processedBooksScores = []
 		self.scores = scores
 		self.prior = prior
 		#print(f"Library created with {nbLivre} {sign} {speed} {books}")
+
+def genPriority(scores,speed,sign):
+	return (sum(scores[:]) / speed) / sign
+	#return sum(scores[:]) + (1/speed) * 1000 + (1/sign) * 1000000
 
 def main(filename):
 	print(f"reading from {filename}.in and exporting to {filename}.out")
@@ -18,6 +28,7 @@ def main(filename):
 	with open(filename+'.txt',"r") as i, open(filename+'.out',"w") as o:
 		nbLivreTot, nbBibli, nbJour = [int(s) for s in i.readline().split(" ")]
 		scoresTot = [int(s) for s in i.readline().split(" ")]
+		print(sum(scoresTot))
 		maxScore = max(scoresTot)
 		minScore = min(scoresTot)
 
@@ -43,7 +54,7 @@ def main(filename):
 			#w = [x ** 0.2 for x in range(len(scores))] #weights
 			#prior = (sum([ _x * _w for _x, _w in zip( scores, w[::-1] ) ]) / speed) / sign 
 			
-			prior = (sum(scores[:]) / speed) / sign
+			prior = genPriority(scores,speed,sign)
 			
 			libs.append(Library(id, nbLivre, sign, speed, books, scores,prior))
 		
@@ -53,10 +64,12 @@ def main(filename):
 		librairies.sort(key=lambda e : e.prior,reverse=True)
 		dejaVu = dict()
 		for l in librairies:
-			for b in l.books:
+			for idx,b in enumerate(l.books):
 				if not dejaVu.get(b,False) :
 					l.processedBooks.append(b)
+					l.processedBooksScores.append(l.scores[idx])
 					dejaVu[b] = True
+			l.prior = genPriority(l.processedBooksScores,speed,sign)
 
 		#retirer les librairies qui n'ont pas de livres.
 		librairies = list(filter(lambda l: len(l.processedBooks) != 0, librairies))
